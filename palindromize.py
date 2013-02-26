@@ -1,8 +1,6 @@
 import re
 
 class Palindrome:
-    text = ""
-
     def __init__(self, prePal, start = False):
         if start:
             rightString = re.sub("[\W\d\s]", "", prePal).lower()[::-1]
