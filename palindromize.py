@@ -51,25 +51,28 @@ class Palindrome:
 
         print " ".join(palArray)
 
+# Different data abstraction rather than strings with sentinal chars
 def find_longest_pal(justLetters, iters = 1):
-    # Takes any arbitrary string of only letters (no digits, spaces or
-    # punctuation) and will find largest palindrome and return an array of:
-    # 
-    # [ any chars before the left half of the largest palindrome,
-    #   left half of the palindrome ("to" in "toot") in curly brackets,
-    #   any chars between left and right halves of the palindrome,
-    #   right half of the palindrome ("ot" in "toot") in curly brackets,
-    #   any chars after right half of the largest palindrome ]
-    # 
-    # i.e., "abtocdotef" will return ["ab", "{to}", "cd", "{ot}", "ef"]
-    # 
-    # If no palindrome is found will return an array of the original string
-    # with square brackets around it.
-    #
-    # i.e., "abcdefghjikl" will return ["[abcdefghijkl]"]
-    #
-    # arg iter represents how many curly brackets to put around for keeping
-    # track of recurring calls
+    """
+    Takes any arbitrary string of only letters (no digits, spaces or
+    punctuation) and will find largest palindrome and return an array of:
+
+    [ any chars before the left half of the largest palindrome,
+      left half of the palindrome ("to" in "toot") in curly brackets,
+      any chars between left and right halves of the palindrome,
+      right half of the palindrome ("ot" in "toot") in curly brackets,
+      any chars after right half of the largest palindrome ]
+
+    i.e., "abtocdotef" will return ["ab", "{to}", "cd", "{ot}", "ef"]
+
+    If no palindrome is found will return an array of the original string
+    with square brackets around it.
+
+    i.e., "abcdefghjikl" will return ["[abcdefghijkl]"]
+
+    arg iter represents how many curly brackets to put around for keeping
+    track of recurring calls
+    """
 
     palLength = len(justLetters)
     counter = 1
