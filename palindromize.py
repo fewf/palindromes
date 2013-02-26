@@ -1,12 +1,8 @@
 import re
 
 class Palindrome:
-    def __init__(self, prePal, start = False):
-        if start:
-            rightString = re.sub("[\W\d\s]", "", prePal).lower()[::-1]
-            self.text = prePal + " " + rightString
-        else:
-            self.text = prePal
+    def __init__(self, prePal):
+        self.text = prePal
 
     def firstHalf(self):
         return self.justLetters()[0:len(self.justLetters())/2]
