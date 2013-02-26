@@ -13,11 +13,11 @@ class Palindrome:
     def justLetters(self):
         return re.sub("[\W\d\s]", "", self.text).lower()
 
-    def isOdd(self):
-        return True if len(self.justLetters()) % 2 else False
+    def is_odd(self):
+        return len(self.just_letters()) % 2
 
-    def isPalindrome(self):
-        return True if self.firstHalf() == self.secondHalf()[::-1] else False
+    def is_palindrome(self):
+        return self.first_half() == self.second_half()[::-1]
 
     def palindromize(self):
         # Palindromize will find the largest not-necessarily-contiguous palindrome
