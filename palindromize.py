@@ -4,13 +4,13 @@ class Palindrome:
     def __init__(self, prePal):
         self.text = prePal
 
-    def firstHalf(self):
-        return self.justLetters()[0:len(self.justLetters())/2]
+    def first_half(self):
+        return self.just_letters()[:len(self.just_letters())/2]
 
-    def secondHalf(self):
-        return self.justLetters()[len(self.justLetters())/2 + len(self.justLetters())%2:]
+    def second_half(self):
+        return self.just_letters()[len(self.just_letters())/2 + len(self.just_letters())%2:]
 
-    def justLetters(self):
+    def just_letters(self):
         return re.sub("[\W\d\s]", "", self.text).lower()
 
     def is_odd(self):
@@ -25,7 +25,7 @@ class Palindrome:
         # that was found. 
 
         # Initialize root list with just one value, the string to be checked
-        palArray = [self.justLetters()]
+        palArray = [self.just_letters()]
         counter = 0
         go = True
         while (go):
@@ -45,13 +45,13 @@ class Palindrome:
                 if piece[0:1] != "{" and piece[0:1] != "[" and len(piece) > 1:
                     # replace the piece of the array we're looking for with
                     # the results of findLongestPal
-                    palArray[palArray.index(piece):palArray.index(piece)+1] = findLongestPal(piece, counter)
+                    palArray[palArray.index(piece):palArray.index(piece)+1] = find_longest_pal(piece, counter)
                     go = True
 
 
         print " ".join(palArray)
 
-def findLongestPal(justLetters, iters = 1):
+def find_longest_pal(justLetters, iters = 1):
     # Takes any arbitrary string of only letters (no digits, spaces or
     # punctuation) and will find largest palindrome and return an array of:
     # 
