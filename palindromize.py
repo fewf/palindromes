@@ -128,5 +128,6 @@ def find_longest_pal(justLetters, iters = 1):
     # if you got down here, there's no palindrome in the stringoston ode:
     return ["[" + justLetters + "]"]  
 
-palindrome2 = Palindrome("Boston ode: fdwqabcbatas do not sob. Todd erase(the fulcrum is here!)s a red dot. Son, I sack fdwzyxyzqtas casinos.")
-palindrome2.palindromize()
+if __name__ == "__main__":
+    palindrome2 = Palindrome("Boston ode: fdwqabcbatas do not sob. Todd erase(the fulcrum is here!)s a red dot. Son, I sack fdwzyxyzqtas casinos.")
+    palindrome2.palindromize()
