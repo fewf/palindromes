@@ -28,7 +28,7 @@ class Palindrome:
         palArray = [self.just_letters()]
         counter = 0
         go = True
-        while (go):
+        while go:
             # Copy palArray
             arrayCopy = palArray[:]
             # Counter keeps track of how many times we call findLongestPal()
@@ -42,7 +42,7 @@ class Palindrome:
                 # 1) doesn't start with { meaning already a found palindrome piece
                 # 2) doesn't start with [ meaning has no palindromes in it
                 # 3) is longer than one character
-                if piece[0:1] != "{" and piece[0:1] != "[" and len(piece) > 1:
+                if piece[0] != "{" and piece[0] != "[" and len(piece) > 1:
                     # replace the piece of the array we're looking for with
                     # the results of findLongestPal
                     palArray[palArray.index(piece):palArray.index(piece)+1] = find_longest_pal(piece, counter)
