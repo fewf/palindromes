@@ -1,29 +1,23 @@
 import re
 
 class Palindrome:
-    text = ""
+    def __init__(self, prePal):
+        self.text = prePal
 
-    def __init__(self, prePal, start = False):
-        if start:
-            rightString = re.sub("[\W\d\s]", "", prePal).lower()[::-1]
-            self.text = prePal + " " + rightString
-        else:
-            self.text = prePal
+    def first_half(self):
+        return self.just_letters()[:len(self.just_letters())/2]
 
-    def firstHalf(self):
-        return self.justLetters()[0:len(self.justLetters())/2]
+    def second_half(self):
+        return self.just_letters()[len(self.just_letters())/2 + len(self.just_letters())%2:]
 
-    def secondHalf(self):
-        return self.justLetters()[len(self.justLetters())/2 + len(self.justLetters())%2:]
-
-    def justLetters(self):
+    def just_letters(self):
         return re.sub("[\W\d\s]", "", self.text).lower()
 
-    def isOdd(self):
-        return True if len(self.justLetters()) % 2 else False
+    def is_odd(self):
+        return len(self.just_letters()) % 2
 
-    def isPalindrome(self):
-        return True if self.firstHalf() == self.secondHalf()[::-1] else False
+    def is_palindrome(self):
+        return self.first_half() == self.second_half()[::-1]
 
     def palindromize(self):
         # Palindromize will find the largest not-necessarily-contiguous palindrome
@@ -31,10 +25,10 @@ class Palindrome:
         # that was found. 
 
         # Initialize root list with just one value, the string to be checked
-        palArray = [self.justLetters()]
+        palArray = [self.just_letters()]
         counter = 0
         go = True
-        while (go):
+        while go:
             # Copy palArray
             arrayCopy = palArray[:]
             # Counter keeps track of how many times we call findLongestPal()
@@ -48,34 +42,37 @@ class Palindrome:
                 # 1) doesn't start with { meaning already a found palindrome piece
                 # 2) doesn't start with [ meaning has no palindromes in it
                 # 3) is longer than one character
-                if piece[0:1] != "{" and piece[0:1] != "[" and len(piece) > 1:
+                if piece[0] != "{" and piece[0] != "[" and len(piece) > 1:
                     # replace the piece of the array we're looking for with
                     # the results of findLongestPal
-                    palArray[palArray.index(piece):palArray.index(piece)+1] = findLongestPal(piece, counter)
+                    palArray[palArray.index(piece):palArray.index(piece)+1] = find_longest_pal(piece, counter)
                     go = True
 
 
         print " ".join(palArray)
 
-def findLongestPal(justLetters, iters = 1):
-    # Takes any arbitrary string of only letters (no digits, spaces or
-    # punctuation) and will find largest palindrome and return an array of:
-    # 
-    # [ any chars before the left half of the largest palindrome,
-    #   left half of the palindrome ("to" in "toot") in curly brackets,
-    #   any chars between left and right halves of the palindrome,
-    #   right half of the palindrome ("ot" in "toot") in curly brackets,
-    #   any chars after right half of the largest palindrome ]
-    # 
-    # i.e., "abtocdotef" will return ["ab", "{to}", "cd", "{ot}", "ef"]
-    # 
-    # If no palindrome is found will return an array of the original string
-    # with square brackets around it.
-    #
-    # i.e., "abcdefghjikl" will return ["[abcdefghijkl]"]
-    #
-    # arg iter represents how many curly brackets to put around for keeping
-    # track of recurring calls
+# Different data abstraction rather than strings with sentinal chars
+def find_longest_pal(justLetters, iters = 1):
+    """
+    Takes any arbitrary string of only letters (no digits, spaces or
+    punctuation) and will find largest palindrome and return an array of:
+
+    [ any chars before the left half of the largest palindrome,
+      left half of the palindrome ("to" in "toot") in curly brackets,
+      any chars between left and right halves of the palindrome,
+      right half of the palindrome ("ot" in "toot") in curly brackets,
+      any chars after right half of the largest palindrome ]
+
+    i.e., "abtocdotef" will return ["ab", "{to}", "cd", "{ot}", "ef"]
+
+    If no palindrome is found will return an array of the original string
+    with square brackets around it.
+
+    i.e., "abcdefghjikl" will return ["[abcdefghijkl]"]
+
+    arg iter represents how many curly brackets to put around for keeping
+    track of recurring calls
+    """
 
     palLength = len(justLetters)
     counter = 1
@@ -134,5 +131,6 @@ def findLongestPal(justLetters, iters = 1):
     # if you got down here, there's no palindrome in the stringoston ode:
     return ["[" + justLetters + "]"]  
 
-palindrome2 = Palindrome("Boston ode: fdwqabcbatas do not sob. Todd erase(the fulcrum is here!)s a red dot. Son, I sack fdwzyxyzqtas casinos.")
-palindrome2.palindromize()
+if __name__ == "__main__":
+    palindrome2 = Palindrome("Boston ode: fdwqabcbatas do not sob. Todd erase(the fulcrum is here!)s a red dot. Son, I sack fdwzyxyzqtas casinos.")
+    palindrome2.palindromize()
